@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PUCOR | Clientes</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="clientes.css" />
+  </head>
+
+  <body>
+    <header class="encabezado">
+      <h1>PUCOR</h1>
+      <p>Reparación y Mantención de Máquinas de Frío</p>
+    </header>
+
+    <main class="contenedor clientes-contenedor">
+      <h2>Registro de Clientes</h2>
+      <p>Administración de clientes de PUCOR.</p>
+
+      <form id="formCliente">
+        <label for="nombreCliente">Nombre o razón social</label>
+        <input
+          type="text"
+          id="nombreCliente"
+          required
+          placeholder="Nombre del cliente"
+        />
+
+        <label for="telefonoCliente">Teléfono</label>
+        <input
+          type="tel"
+          id="telefonoCliente"
+          required
+          placeholder="+56 9 1234 5678"
+        />
+
+        <label for="direccionCliente">Dirección</label>
+        <input
+          type="text"
+          id="direccionCliente"
+          required
+          placeholder="Dirección del cliente"
+        />
+
+        <button type="submit">Guardar cliente</button>
+      </form>
+
+      <h3>Clientes registrados</h3>
+      <div id="listaClientes"></div>
+
+      <button id="btnVolver" type="button">Volver al inicio</button>
+    </main>
+
+    <script src="clientes.js"></script>
+  </body>
+</html>

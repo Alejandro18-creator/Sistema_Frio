@@ -1,0 +1,61 @@
+.clientes-contenedor {
+  max-width: 850px;
+  margin: 30px auto;
+}
+
+.clientes-contenedor form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 25px 0;
+  padding: 25px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.clientes-contenedor label {
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.clientes-contenedor input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+.clientes-contenedor input:focus {
+  outline: none;
+  border-color: var(--azul-pucor);
+}
+
+.clientes-contenedor form button {
+  margin-top: 15px;
+}
+
+#listaClientes {
+  display: grid;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.tarjeta-cliente {
+  padding: 18px;
+  background: white;
+  border-left: 5px solid var(--azul-pucor);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+.tarjeta-cliente h4 {
+  margin: 0 0 10px;
+  color: var(--azul-pucor);
+}
+
+.tarjeta-cliente p {
+  margin: 5px 0;
+}

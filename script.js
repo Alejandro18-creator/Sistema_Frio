@@ -58,17 +58,20 @@ function renderizarCalendario() {
   diasCalendario.innerHTML = "";
 
   if (fechaElegida) {
-    horaElegida = horasElegidas[formatoFecha(fechaElegida)] || "";
+    const fechaClave = formatoFecha(fechaElegida);
+    const horasDelDia = horasElegidas[fechaClave] || [];
+
+    horaElegida = horasDelDia[horasDelDia.length - 1] || "";
 
     document.querySelectorAll(".hora-boton").forEach((boton) => {
       boton.classList.toggle(
         "hora-seleccionada",
-        boton.dataset.hora === horaElegida,
+        horasDelDia.includes(boton.dataset.hora),
       );
     });
 
-    if (horaElegida) {
-      disponibilidad.textContent = `Hora seleccionada: ${horaElegida}`;
+    if (horasDelDia.length > 0) {
+      disponibilidad.textContent = `Horas seleccionadas: ${horasDelDia.join(", ")}`;
     } else {
       disponibilidad.textContent = "Selecciona una hora para esta fecha.";
     }
@@ -123,9 +126,11 @@ function actualizarResumen() {
   }
 
   const fecha = mostrarFecha(fechaElegida);
+  const fechaClave = formatoFecha(fechaElegida);
+  const horasDelDia = horasElegidas[fechaClave] || [];
 
-  if (horaElegida) {
-    resumenCita.textContent = `Día seleccionado: ${fecha}. Hora elegida: ${horaElegida}.`;
+  if (horasDelDia.length > 0) {
+    resumenCita.textContent = `Día seleccionado: ${fecha}. Horas seleccionadas: ${horasDelDia.join(", ")}.`;
   } else {
     resumenCita.textContent = `Día seleccionado: ${fecha}. Ahora elige una hora.`;
   }
@@ -164,11 +169,24 @@ horariosDisponibles.addEventListener("click", (evento) => {
 
   const fechaClave = formatoFecha(fechaElegida);
 
+  if (!horasElegidas[fechaClave]) {
+    horasElegidas[fechaClave] = [];
+  }
+
   horaElegida = boton.dataset.hora;
-  horasElegidas[fechaClave] = horaElegida;
+
+  if (horasElegidas[fechaClave].includes(horaElegida)) {
+    alert("Esta hora ya fue seleccionada para esta fecha.");
+    return;
+  }
+
+  horasElegidas[fechaClave].push(horaElegida);
 
   document.querySelectorAll(".hora-boton").forEach((hora) => {
-    hora.classList.remove("hora-seleccionada");
+    hora.classList.toggle(
+      "hora-seleccionada",
+      horasElegidas[fechaClave].includes(hora.dataset.hora),
+    );
   });
 
   boton.classList.add("hora-seleccionada");
@@ -180,7 +198,7 @@ horariosDisponibles.addEventListener("click", (evento) => {
 });
 
 btnClientes.addEventListener("click", () => {
-  alert("Registro de clientes: próximamente");
+  window.location.href = "clientes.html";
 });
 
 btnTrabajos.addEventListener("click", () => {
