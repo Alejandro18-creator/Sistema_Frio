@@ -16,7 +16,14 @@
 
 body {
   font-family: Arial, sans-serif;
-  background: var(--gris-fondo);
+  background-color: var(--gris-fondo);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.40), rgba(255, 255, 255, 0.40)),
+    url("imagenes/logo1.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto, 90vw;
+  background-attachment: fixed;
   color: var(--texto);
   min-height: 100vh;
 }
