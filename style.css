@@ -197,6 +197,26 @@ input {
   box-shadow: 0 3px 8px rgba(7, 55, 131, 0.25);
 }
 
+.dia-calendario.dia-con-hora:not(.dia-seleccionado) {
+  background: #d5e4fb;
+  border: 2px solid var(--azul-pucor);
+  color: var(--azul-oscuro);
+  font-weight: bold;
+  position: relative;
+}
+
+.dia-calendario.dia-con-hora:not(.dia-seleccionado)::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--azul-pucor);
+  border-radius: 50%;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .dia-calendario.dia-pasado {
   opacity: 0.35;
   cursor: not-allowed;

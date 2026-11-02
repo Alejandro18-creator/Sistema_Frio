@@ -58,24 +58,22 @@ function renderizarCalendario() {
   diasCalendario.innerHTML = "";
 
   if (fechaElegida) {
-      horaElegida = horasElegidas[formatoFecha(fechaElegida)] || "";
+    horaElegida = horasElegidas[formatoFecha(fechaElegida)] || "";
 
-      document.querySelectorAll(".hora-boton").forEach((boton) => {
-          boton.classList.toggle(
-              "hora-seleccionada",
-              boton.dataset.hora === horaElegida
-          );
-      });
+    document.querySelectorAll(".hora-boton").forEach((boton) => {
+      boton.classList.toggle(
+        "hora-seleccionada",
+        boton.dataset.hora === horaElegida,
+      );
+    });
 
-      if (horaElegida) {
-          disponibilidad.textContent =
-              `Hora seleccionada: ${horaElegida}`;
-      } else {
-          disponibilidad.textContent =
-              "Selecciona una hora para esta fecha.";
-      }
+    if (horaElegida) {
+      disponibilidad.textContent = `Hora seleccionada: ${horaElegida}`;
+    } else {
+      disponibilidad.textContent = "Selecciona una hora para esta fecha.";
+    }
 
-      actualizarResumen();
+    actualizarResumen();
   }
 
   const primerDia = new Date(anio, mes, 1).getDay();
@@ -93,6 +91,9 @@ function renderizarCalendario() {
 
     botonDia.type = "button";
     botonDia.className = "dia-calendario";
+    if (horasElegidas[formatoFecha(fecha)]) {
+      botonDia.classList.add("dia-con-hora");
+    }
     botonDia.textContent = numeroDia;
 
     if (fecha < manana) {
@@ -175,6 +176,7 @@ horariosDisponibles.addEventListener("click", (evento) => {
   disponibilidad.textContent = `Hora seleccionada: ${horaElegida}`;
 
   actualizarResumen();
+  renderizarCalendario();
 });
 
 btnClientes.addEventListener("click", () => {
