@@ -1,6 +1,7 @@
 const formCliente = document.getElementById("formCliente");
 const nombreCliente = document.getElementById("nombreCliente");
 const telefonoCliente = document.getElementById("telefonoCliente");
+const correoCliente = document.getElementById("correoCliente");
 const direccionCliente = document.getElementById("direccionCliente");
 const listaClientes = document.getElementById("listaClientes");
 const buscarCliente = document.getElementById("buscarCliente");
@@ -39,10 +40,13 @@ function mostrarClientes() {
     const telefono = document.createElement("p");
     telefono.textContent = `Teléfono: ${cliente.telefono}`;
 
+    const correo = document.createElement("p");
+    correo.textContent = `Correo: ${cliente.correo || "No registrado"}`;
+
     const direccion = document.createElement("p");
     direccion.textContent = `Dirección: ${cliente.direccion}`;
 
-        const btnEditar = document.createElement("button");
+    const btnEditar = document.createElement("button");
     btnEditar.textContent = "Editar";
     btnEditar.type = "button";
 
@@ -74,7 +78,7 @@ function mostrarClientes() {
 
     btnEliminar.addEventListener("click", () => {
       const confirmar = confirm(
-        `¿Estás seguro de eliminar a ${cliente.nombre}?`
+        `¿Estás seguro de eliminar a ${cliente.nombre}?`,
       );
 
       if (!confirmar) return;
@@ -86,7 +90,7 @@ function mostrarClientes() {
       mostrarClientes();
     });
 
-    tarjeta.append(nombre, telefono, direccion, btnEditar, btnEliminar);
+    tarjeta.append(nombre, telefono, correo, direccion, btnEditar, btnEliminar);
     listaClientes.appendChild(tarjeta);
   });
 }
@@ -97,6 +101,7 @@ formCliente.addEventListener("submit", (evento) => {
   const nuevoCliente = {
     nombre: nombreCliente.value.trim(),
     telefono: telefonoCliente.value.trim(),
+    correo: correoCliente.value.trim(),
     direccion: direccionCliente.value.trim(),
   };
 
