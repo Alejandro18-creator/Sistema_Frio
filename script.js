@@ -202,7 +202,7 @@ btnClientes.addEventListener("click", () => {
 });
 
 btnTrabajos.addEventListener("click", () => {
-  alert("Control de trabajos: próximamente");
+  window.location.href = "Costo_Utilidades/trabajos.html";
 });
 
 renderizarCalendario();

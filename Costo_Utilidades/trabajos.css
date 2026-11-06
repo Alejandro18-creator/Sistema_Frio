@@ -1,0 +1,36 @@
+.menu-trabajos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin: 35px 0;
+}
+
+.menu-trabajos button {
+  min-height: 130px;
+  padding: 25px;
+  background: var(--azul-pucor);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    background 0.2s;
+}
+
+.menu-trabajos button:hover {
+  background: var(--azul-oscuro);
+  transform: translateY(-3px);
+}
+
+#btnVolver {
+  margin-top: 15px;
+}
+
+@media (max-width: 600px) {
+  .menu-trabajos {
+    grid-template-columns: 1fr;
+  }
+}
