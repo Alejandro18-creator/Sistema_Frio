@@ -25,11 +25,16 @@
         <button id="btnTrabajosRealizados" type="button">
           Trabajos realizados
         </button>
+
+        <button id="btnNuevaCotizacion" type="button">
+          NUEVAS Cotizaciones
+        </button>
       </section>
 
-      <section id="pantallaCotizaciones" hidden>
+      <!-- El menú intermedio fue eliminado -->
+
+      <div id="pantallaNuevaCotizacion" hidden>
         <h2>Nueva Cotización</h2>
-        <p>Preparación de presupuestos para clientes.</p>
 
         <form id="formCotizacion">
           <h3>Datos del cliente</h3>
@@ -48,7 +53,6 @@
           ></textarea>
 
           <h3>Repuestos</h3>
-
           <div id="listaRepuestos"></div>
 
           <button type="button" id="btnAgregarRepuesto">
@@ -56,7 +60,6 @@
           </button>
 
           <h3>Materiales</h3>
-
           <div id="listaMateriales"></div>
 
           <button type="button" id="btnAgregarMaterial">
@@ -85,13 +88,68 @@
           <button type="submit">Guardar cotización</button>
         </form>
 
-        <button id="btnVolverCotizaciones" type="button">Volver al menú</button>
-      </section>
+        <button id="btnVolverNuevaCotizacion" type="button">Volver</button>
+      </div>
+
+      <div id="pantallaHistorialCotizaciones" hidden>
+        <h2>Cotizaciones realizadas</h2>
+
+        <div id="listaCotizaciones">
+          Todavía no hay cotizaciones registradas.
+        </div>
+
+        <button
+          id="btnVolverHistorialCotizaciones"
+          class="btn-volver-modulo"
+          type="button"
+        >
+          ← Volver
+        </button>
+      </div>
+
+      <div id="pantallaEditarTrabajo" hidden>
+        <h2>Editar trabajo</h2>
+
+        <p id="datosCotizacionOriginal"></p>
+
+        <h3>Repuestos adicionales</h3>
+        <div id="listaRepuestosAdicionales"></div>
+
+        <button type="button" id="btnAgregarRepuestoAdicional">
+          + Agregar repuesto
+        </button>
+
+        <h3>Materiales adicionales</h3>
+        <div id="listaMaterialesAdicionales"></div>
+
+        <button type="button" id="btnAgregarMaterialAdicional">
+          + Agregar material
+        </button>
+
+        <h3>Otros costos adicionales</h3>
+
+        <label for="costoTrasladoAdicional">Traslado adicional ($)</label>
+        <input type="number" id="costoTrasladoAdicional" min="0" value="0">
+
+        <label for="costoManoObraAdicional">Mano de obra adicional ($)</label>
+        <input type="number" id="costoManoObraAdicional" min="0" value="0">
+
+        <button type="button" id="btnGuardarAdicionales">
+          Guardar adicionales
+        </button>
+
+        <button type="button" id="btnVolverEdicionTrabajo" class="btn-volver-modulo">
+          ← Volver
+        </button>
+      </div>
 
       <section id="pantallaTrabajos" hidden>
         <h2>Trabajos realizados</h2>
         <p>Control de costos y utilidades de los trabajos.</p>
-        <button id="btnVolverTrabajos" type="button">Volver al menú</button>
+
+        <button id="btnVolverTrabajos" class="btn-volver-modulo" type="button">
+          ← Volver
+        </button>
       </section>
 
       <button id="btnVolver" type="button">Volver al inicio</button>

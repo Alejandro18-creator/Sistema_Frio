@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PUCOR | Clientes registrados</title>
+
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="registrados.css" />
+  </head>
+
+  <body>
+    <header class="encabezado">
+      <h1>PUCOR</h1>
+      <p>Reparación y Mantención de Máquinas de Frío</p>
+    </header>
+
+    <main class="contenedor clientes-registrados">
+      <h2>Clientes registrados</h2>
+      <p>Consulta y administra los clientes de PUCOR.</p>
+
+      <input
+        type="search"
+        id="buscarCliente"
+        placeholder="Buscar por nombre, teléfono o dirección..."
+      />
+
+      <div id="listaClientes"></div>
+
+      <button id="btnVolver" type="button">← Volver</button>
+    </main>
+
+    <script src="registrados.js"></script>
+  </body>
+</html>

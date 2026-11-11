@@ -1,0 +1,65 @@
+
+.ficha-contenedor {
+  max-width: 1100px;
+  margin: 30px auto;
+}
+
+.datos-ficha,
+.historial-ficha,
+.trabajos-ficha {
+  background: rgba(255, 255, 255, 0.96);
+  padding: 25px;
+  margin: 20px 0;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.09);
+}
+
+.datos-ficha {
+  border-left: 6px solid var(--azul-pucor);
+}
+
+.ficha-contenedor h2 {
+  color: var(--azul-pucor);
+  margin-top: 0;
+}
+
+.datos-ficha p {
+  margin: 12px 0;
+}
+
+#btnVolver {
+  padding: 9px 16px;
+  background: var(--azul-pucor);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+#historialCotizaciones,
+#historialTrabajos {
+  display: grid;
+  gap: 12px;
+}
+
+.tarjeta-historial {
+  padding: 16px;
+  background: #f4f7fb;
+  border-left: 4px solid var(--azul-pucor);
+  border-radius: 8px;
+}
+
+.tarjeta-historial h3 {
+  color: var(--azul-pucor);
+  margin-top: 0;
+}
+
+@media (max-width: 600px) {
+  .datos-ficha,
+  .historial-ficha,
+  .trabajos-ficha {
+    padding: 16px;
+  }
+}

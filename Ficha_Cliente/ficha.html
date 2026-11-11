@@ -1,0 +1,47 @@
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PUCOR | Ficha del Cliente</title>
+
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="ficha.css" />
+  </head>
+
+  <body>
+    <header class="encabezado">
+      <h1>PUCOR</h1>
+      <p>Reparación y Mantención de Máquinas de Frío</p>
+    </header>
+
+    <main class="contenedor ficha-contenedor">
+      <button id="btnVolver" type="button">← Volver a clientes</button>
+
+      <section class="datos-ficha">
+        <h2 id="nombreFicha">Ficha del cliente</h2>
+
+        <p><strong>Teléfono:</strong> <span id="telefonoFicha"></span></p>
+        <p><strong>Correo:</strong> <span id="correoFicha"></span></p>
+        <p><strong>Dirección:</strong> <span id="direccionFicha"></span></p>
+      </section>
+
+      <section class="historial-ficha">
+        <h2>Historial de cotizaciones</h2>
+        <div id="historialCotizaciones">
+          Todavía no hay cotizaciones registradas.
+        </div>
+      </section>
+
+      <section class="trabajos-ficha">
+        <h2>Trabajos realizados</h2>
+        <div id="historialTrabajos">
+          Todavía no hay trabajos registrados.
+        </div>
+      </section>
+    </main>
+
+    <script src="ficha.js"></script>
+  </body>
+</html>

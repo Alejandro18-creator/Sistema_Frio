@@ -78,3 +78,77 @@
   background: #dc3545;
   color: white;
 }
+/* DISTRIBUCIÓN DEL MÓDULO CLIENTES */
+
+.clientes-contenedor {
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+/* MENÚ LATERAL */
+
+.menu-lateral-clientes {
+  background: var(--azul-pucor);
+  padding: 22px 15px;
+  border-radius: 12px;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.menu-lateral-clientes h3 {
+  color: white;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.menu-lateral-clientes a {
+  display: block;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  border-radius: 7px;
+  font-weight: bold;
+}
+
+.menu-lateral-clientes a:hover,
+.menu-lateral-clientes .opcion-activa {
+  background: var(--azul-oscuro);
+}
+
+.menu-lateral-clientes button {
+  margin-top: auto;
+  padding: 10px;
+  background: white;
+  color: var(--azul-pucor);
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* CONTENIDO PRINCIPAL */
+
+.contenido-clientes {
+  min-width: 0;
+}
+
+.contenido-clientes h2 {
+  color: var(--azul-pucor);
+}
+
+/* ADAPTACIÓN A CELULARES */
+
+@media (max-width: 700px) {
+  .clientes-contenedor {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-lateral-clientes {
+    min-height: auto;
+  }
+}

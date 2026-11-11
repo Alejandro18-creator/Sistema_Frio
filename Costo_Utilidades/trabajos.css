@@ -1,3 +1,7 @@
+[hidden] {
+  display: none !important;
+}
+
 .menu-trabajos {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -6,13 +10,13 @@
 }
 
 .menu-trabajos button {
-  min-height: 130px;
-  padding: 25px;
+  min-height: 45px;
+  padding: 15px;
   background: var(--azul-pucor);
   color: white;
   border: none;
   border-radius: 12px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   transition:
@@ -33,4 +37,107 @@
   .menu-trabajos {
     grid-template-columns: 1fr;
   }
+}
+/* FORMULARIO DE NUEVAS COTIZACIONES */
+
+#pantallaNuevaCotizacion {
+  max-width: 900px;
+  margin: 25px auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+}
+
+#pantallaNuevaCotizacion h2 {
+  color: var(--azul-pucor);
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+#formCotizacion h3 {
+  color: var(--azul-pucor);
+  border-bottom: 2px solid #dce5f2;
+  padding-bottom: 8px;
+  margin-top: 25px;
+}
+
+#formCotizacion label {
+  display: block;
+  margin: 12px 0 6px;
+  font-weight: bold;
+}
+
+#formCotizacion input,
+#formCotizacion select,
+#formCotizacion textarea {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+#formCotizacion textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.fila-cotizacion {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+#formCotizacion button,
+#btnVolverNuevaCotizacion {
+  padding: 11px 18px;
+  margin-top: 12px;
+  background: var(--azul-pucor);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#formCotizacion button:hover,
+#btnVolverNuevaCotizacion:hover {
+  background: var(--azul-oscuro);
+}
+
+#formCotizacion h2 {
+  text-align: right;
+  margin-top: 25px;
+}
+
+@media (max-width: 600px) {
+  #pantallaNuevaCotizacion {
+    padding: 15px;
+  }
+
+  .fila-cotizacion {
+    grid-template-columns: 1fr;
+  }
+}
+/* Botones pequeños para volver al menú */
+.btn-volver-modulo {
+  display: inline-block;
+  width: auto;
+  min-height: auto;
+  padding: 8px 16px;
+  margin-top: 20px;
+  background: var(--azul-pucor);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-volver-modulo:hover {
+  background: var(--azul-oscuro);
 }

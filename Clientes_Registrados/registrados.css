@@ -1,0 +1,59 @@
+.clientes-registrados {
+  max-width: 1000px;
+  margin: 30px auto;
+}
+
+.clientes-registrados h2 {
+  color: var(--azul-pucor);
+  text-align: center;
+}
+
+#buscarCliente {
+  width: 100%;
+  padding: 12px;
+  margin: 20px 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 15px;
+}
+
+#listaClientes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.tarjeta-cliente {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid var(--azul-pucor);
+}
+
+.tarjeta-cliente h4 {
+  color: var(--azul-pucor);
+  font-size: 18px;
+  margin-top: 0;
+}
+
+.tarjeta-cliente p {
+  margin: 8px 0;
+}
+
+.tarjeta-cliente button {
+  margin: 12px 8px 0 0;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: var(--azul-pucor);
+  color: white;
+  cursor: pointer;
+}
+
+#btnVolver {
+  margin-top: 25px;
+  padding: 8px 16px;
+  font-size: 13px;
+}
