@@ -43,17 +43,33 @@ const totalCotizacion = document.getElementById("totalCotizacion");
 const listaCotizaciones = document.getElementById("listaCotizaciones");
 
 // ELEMENTOS DE EDICIÓN DE TRABAJOS
-const datosCotizacionOriginal = document.getElementById("datosCotizacionOriginal");
-const listaRepuestosAdicionales = document.getElementById("listaRepuestosAdicionales");
-const listaMaterialesAdicionales = document.getElementById("listaMaterialesAdicionales");
+const datosCotizacionOriginal = document.getElementById(
+  "datosCotizacionOriginal",
+);
+const listaRepuestosAdicionales = document.getElementById(
+  "listaRepuestosAdicionales",
+);
+const listaMaterialesAdicionales = document.getElementById(
+  "listaMaterialesAdicionales",
+);
 
-const btnAgregarRepuestoAdicional = document.getElementById("btnAgregarRepuestoAdicional");
-const btnAgregarMaterialAdicional = document.getElementById("btnAgregarMaterialAdicional");
+const btnAgregarRepuestoAdicional = document.getElementById(
+  "btnAgregarRepuestoAdicional",
+);
+const btnAgregarMaterialAdicional = document.getElementById(
+  "btnAgregarMaterialAdicional",
+);
 const btnGuardarAdicionales = document.getElementById("btnGuardarAdicionales");
-const btnVolverEdicionTrabajo = document.getElementById("btnVolverEdicionTrabajo");
+const btnVolverEdicionTrabajo = document.getElementById(
+  "btnVolverEdicionTrabajo",
+);
 
-const costoTrasladoAdicional = document.getElementById("costoTrasladoAdicional");
-const costoManoObraAdicional = document.getElementById("costoManoObraAdicional");
+const costoTrasladoAdicional = document.getElementById(
+  "costoTrasladoAdicional",
+);
+const costoManoObraAdicional = document.getElementById(
+  "costoManoObraAdicional",
+);
 
 // NAVEGACIÓN
 
@@ -239,6 +255,12 @@ formCotizacion.addEventListener("submit", (evento) => {
 
   const nuevaCotizacion = {
     id: Date.now(),
+    numero: String(
+      (JSON.parse(localStorage.getItem("cotizacionesPUCOR")) || []).reduce(
+        (mayor, c) => Math.max(mayor, Number(c.numero) || 0),
+        0,
+      ) + 1,
+    ).padStart(5, "0"),
     fecha: new Date().toLocaleDateString("es-CL"),
     cliente: cliente.nombre,
     descripcion: descripcionCotizacion.value.trim(),
@@ -286,7 +308,7 @@ function mostrarCotizaciones() {
     tarjeta.className = "tarjeta-cotizacion";
 
     const numero = document.createElement("h3");
-    numero.textContent = `Cotización N.º ${cotizacion.id}`;
+    numero.textContent = `Cotización N.º ${cotizacion.numero || "Sin número"}`;
 
     const fecha = document.createElement("p");
     fecha.textContent = `Fecha: ${cotizacion.fecha}`;

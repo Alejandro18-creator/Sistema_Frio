@@ -9,6 +9,20 @@ const btnVolver = document.getElementById("btnVolver");
 
 let clientes = JSON.parse(localStorage.getItem("clientesPUCOR")) || [];
 
+// Asignar ID a clientes antiguos que todavía no tengan uno
+let clientesActualizados = false;
+
+clientes.forEach((cliente) => {
+  if (!cliente.id) {
+    cliente.id = Date.now() + Math.floor(Math.random() * 100000);
+    clientesActualizados = true;
+  }
+});
+
+if (clientesActualizados) {
+  localStorage.setItem("clientesPUCOR", JSON.stringify(clientes));
+}
+
 function mostrarClientes() {
   listaClientes.innerHTML = "";
 
@@ -16,9 +30,15 @@ function mostrarClientes() {
 
   const clientesFiltrados = clientes.filter((cliente) => {
     return (
-      cliente.nombre.toLowerCase().includes(termino) ||
-      cliente.telefono.toLowerCase().includes(termino) ||
-      cliente.direccion.toLowerCase().includes(termino)
+      String(cliente.nombre || "")
+        .toLowerCase()
+        .includes(termino) ||
+      String(cliente.telefono || "")
+        .toLowerCase()
+        .includes(termino) ||
+      String(cliente.direccion || "")
+        .toLowerCase()
+        .includes(termino)
     );
   });
 
@@ -99,6 +119,7 @@ formCliente.addEventListener("submit", (evento) => {
   evento.preventDefault();
 
   const nuevoCliente = {
+    id: Date.now(),
     nombre: nombreCliente.value.trim(),
     telefono: telefonoCliente.value.trim(),
     correo: correoCliente.value.trim(),

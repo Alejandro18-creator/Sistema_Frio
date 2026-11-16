@@ -141,3 +141,73 @@
 .btn-volver-modulo:hover {
   background: var(--azul-oscuro);
 }
+
+/* TARJETAS DE COTIZACIONES */
+
+.tarjeta-cotizacion {
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid #dce5f2;
+  border-left: 5px solid var(--azul-pucor);
+  border-radius: 12px;
+  padding: 22px;
+  margin: 20px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tarjeta-cotizacion:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.12);
+}
+
+.tarjeta-cotizacion h3 {
+  color: var(--azul-pucor);
+  margin: 0 0 12px;
+}
+
+.tarjeta-cotizacion p {
+  color: #475569;
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.tarjeta-cotizacion h3:nth-of-type(2) {
+  color: #05265b;
+  font-size: 20px;
+  margin-top: 15px;
+}
+
+.tarjeta-cotizacion p:last-of-type {
+  display: inline-block;
+  background: #e8eef8;
+  color: var(--azul-pucor);
+  padding: 7px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.tarjeta-cotizacion button {
+  padding: 10px 16px;
+  margin: 12px 8px 0 0;
+  background: var(--azul-pucor);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tarjeta-cotizacion button:hover {
+  background: var(--azul-oscuro);
+}
+
+@media (max-width: 600px) {
+  .tarjeta-cotizacion {
+    padding: 16px;
+  }
+
+  .tarjeta-cotizacion button {
+    width: 100%;
+    margin-right: 0;
+  }
+}
