@@ -197,10 +197,6 @@ horariosDisponibles.addEventListener("click", (evento) => {
   renderizarCalendario();
 });
 
-btnClientes.addEventListener("click", () => {
-  window.location.href = "clientes.html";
-});
-
 btnTrabajos.addEventListener("click", () => {
   window.location.href = "Costo_Utilidades/trabajos.html";
 });

@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="es">
   <head>
@@ -11,76 +10,84 @@
   </head>
 
   <body>
-    <header class="encabezado">
-      <h1>PUCOR</h1>
-      <p>Reparación y Mantención de Máquinas de Frío</p>
-    </header>
+    <div class="estructura-principal">
+      <aside class="barra-lateral" aria-label="Navegación principal">
+        <header class="encabezado">
+          <h1>PUCOR</h1>
+          <p>Reparación y Mantención de Máquinas de Frío</p>
+        </header>
 
-    <main class="contenedor clientes-contenedor">
+        <nav class="menu">
+          <a href="index.html">Calendario de Citas</a>
 
-      <aside class="menu-lateral-clientes">
-        <h3>MENÚ CLIENTES</h3>
+          <details class="grupo-menu" open>
 
-        <a href="clientes.html" class="opcion-activa">
-          Registro de clientes
-        </a>
+            <summary class="opcion-activa">Clientes</summary>
 
-        <a href="Clientes_Registrados/registrados.html">
-          Clientes registrados
-        </a>
+            <div class="submenu-clientes">
+              <a href="clientes.html" class="subopcion-activa">
+                Registro de clientes
+              </a>
 
-        <button id="btnVolver" type="button">
-          ← Volver al inicio
-        </button>
+              <a href="Clientes_Registrados/registrados.html">
+                Clientes registrados
+              </a>
+            </div>
+          </details>
+
+          <a href="Costo_Utilidades/trabajos.html">Control de Trabajos</a>
+        </nav>
       </aside>
 
-      <section class="contenido-clientes">
-        <h2>Registro de Clientes</h2>
-        <p>Administración de clientes de PUCOR.</p>
+      <div class="contenido-principal">
+        <main class="contenedor clientes-contenedor">
+          <section class="contenido-clientes">
+            <h2>Registro de Clientes</h2>
+            <p>Administración de clientes de PUCOR.</p>
 
-        <form id="formCliente">
-          <label for="nombreCliente">Nombre o razón social</label>
-          <input
-            type="text"
-            id="nombreCliente"
-            required
-            placeholder="Nombre del cliente"
-          />
+            <form id="formCliente">
+              <label for="nombreCliente">Nombre o razón social</label>
+              <input
+                type="text"
+                id="nombreCliente"
+                required
+                placeholder="Nombre del cliente"
+              />
 
-          <label for="telefonoCliente">Teléfono</label>
-          <input
-            type="tel"
-            id="telefonoCliente"
-            required
-            placeholder="+56 9 1234 5678"
-          />
+              <label for="telefonoCliente">Teléfono</label>
+              <input
+                type="tel"
+                id="telefonoCliente"
+                required
+                placeholder="+56 9 1234 5678"
+              />
 
-          <label for="correoCliente">Correo electrónico</label>
-          <input
-            type="email"
-            id="correoCliente"
-            placeholder="correo@ejemplo.cl"
-          />
+              <label for="correoCliente">Correo electrónico</label>
+              <input
+                type="email"
+                id="correoCliente"
+                placeholder="correo@ejemplo.cl"
+              />
 
-          <label for="direccionCliente">Dirección</label>
-          <input
-            type="text"
-            id="direccionCliente"
-            required
-            placeholder="Dirección del cliente"
-          />
+              <label for="direccionCliente">Dirección</label>
+              <input
+                type="text"
+                id="direccionCliente"
+                required
+                placeholder="Dirección del cliente"
+              />
 
-          <button type="submit">Guardar cliente</button>
-        </form>
+              <button type="submit">Guardar cliente</button>
+            </form>
 
-        <!-- Se conserva para compatibilidad con clientes.js -->
-        <div hidden>
-          <input type="search" id="buscarCliente" />
-          <div id="listaClientes"></div>
-        </div>
-      </section>
-
-    </main>
+            <div hidden>
+              <input type="search" id="buscarCliente" />
+              <div id="listaClientes"></div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
 
     <script src="clientes.js"></script>
   </body>

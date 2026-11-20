@@ -60,9 +60,6 @@ const btnAgregarMaterialAdicional = document.getElementById(
   "btnAgregarMaterialAdicional",
 );
 const btnGuardarAdicionales = document.getElementById("btnGuardarAdicionales");
-const btnVolverEdicionTrabajo = document.getElementById(
-  "btnVolverEdicionTrabajo",
-);
 
 const costoTrasladoAdicional = document.getElementById(
   "costoTrasladoAdicional",
@@ -74,17 +71,16 @@ const costoManoObraAdicional = document.getElementById(
 // NAVEGACIÓN
 
 function ocultarTodasLasPantallas() {
-  menuTrabajos.hidden = true;
   pantallaNuevaCotizacion.hidden = true;
   pantallaHistorialCotizaciones.hidden = true;
   pantallaTrabajos.hidden = true;
   pantallaEditarTrabajo.hidden = true;
 }
 
-function volverAlMenuPrincipal() {
+/*function volverAlMenuPrincipal() {
   ocultarTodasLasPantallas();
   menuTrabajos.hidden = false;
-}
+}*/
 
 btnCotizaciones.addEventListener("click", () => {
   ocultarTodasLasPantallas();
@@ -103,9 +99,7 @@ btnTrabajosRealizados.addEventListener("click", () => {
   pantallaTrabajos.hidden = false;
 });
 
-btnVolverNuevaCotizacion.addEventListener("click", volverAlMenuPrincipal);
 btnVolverHistorialCotizaciones.addEventListener("click", volverAlMenuPrincipal);
-btnVolverTrabajos.addEventListener("click", volverAlMenuPrincipal);
 
 btnVolver.addEventListener("click", () => {
   window.location.href = "../index.html";
@@ -125,6 +119,7 @@ function cargarClientes() {
     opcion.textContent = cliente.nombre;
     clienteCotizacion.appendChild(opcion);
   });
+  btnCotizaciones;
 }
 
 // REPUESTOS Y MATERIALES

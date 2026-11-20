@@ -1,6 +1,5 @@
 const listaClientes = document.getElementById("listaClientes");
 const buscarCliente = document.getElementById("buscarCliente");
-const btnVolver = document.getElementById("btnVolver");
 
 let clientes = JSON.parse(localStorage.getItem("clientesPUCOR")) || [];
 
@@ -70,9 +69,5 @@ function mostrarClientes() {
 }
 
 buscarCliente.addEventListener("input", mostrarClientes);
-
-btnVolver.addEventListener("click", () => {
-  window.location.href = "../clientes.html";
-});
 
 mostrarClientes();

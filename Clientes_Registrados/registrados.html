@@ -10,25 +10,45 @@
   </head>
 
   <body>
-    <header class="encabezado">
-      <h1>PUCOR</h1>
-      <p>Reparación y Mantención de Máquinas de Frío</p>
-    </header>
+    <div class="estructura-principal">
+      <aside class="barra-lateral" aria-label="Navegación principal">
+        <header class="encabezado">
+          <h1>PUCOR</h1>
+          <p>Reparación y Mantención de Máquinas de Frío</p>
+        </header>
 
-    <main class="contenedor clientes-registrados">
-      <h2>Clientes registrados</h2>
-      <p>Consulta y administra los clientes de PUCOR.</p>
+        <nav class="menu">
+          <a href="../index.html">Calendario de Citas</a>
 
-      <input
-        type="search"
-        id="buscarCliente"
-        placeholder="Buscar por nombre, teléfono o dirección..."
-      />
+          <details class="grupo-menu" open>
+            <summary class="opcion-activa">Clientes</summary>
+            <div class="submenu-clientes">
+              <a href="../clientes.html">Registro de clientes</a>
+              <a href="registrados.html" class="subopcion-activa">
+                Clientes registrados
+              </a>
+            </div>
+          </details>
 
-      <div id="listaClientes"></div>
+          <a href="../Costo_Utilidades/trabajos.html">Control de Trabajos</a>
+        </nav>
+      </aside>
 
-      <button id="btnVolver" type="button">← Volver</button>
-    </main>
+      <div class="contenido-principal">
+        <main class="contenedor clientes-registrados">
+          <h2>Clientes registrados</h2>
+          <p>Consulta y administra los clientes de PUCOR.</p>
+
+          <input
+            type="search"
+            id="buscarCliente"
+            placeholder="Buscar por nombre, teléfono o dirección..."
+          />
+
+          <div id="listaClientes"></div>
+        </main>
+      </div>
+    </div>
 
     <script src="registrados.js"></script>
   </body>

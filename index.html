@@ -7,114 +7,136 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header class="encabezado">
-      <h1>PUCOR</h1>
-      <p>Reparación y Mantención de Máquinas de Frío</p>
-    </header>
+    <div class="estructura-principal">
+      <aside class="barra-lateral" aria-label="Menú principal">
+        <header class="encabezado">
+          <h1>PUCOR</h1>
+          <p>Reparación y Mantención de Máquinas de Frío</p>
+        </header>
 
-    <main class="contenedor">
-      <h2>Sistema de Gestión</h2>
-      <p>Bienvenido al sistema de administración técnica.</p>
+        <nav class="menu">
+          <button id="btnCalendario">Calendario de Citas</button>
+          <details class="grupo-menu">
+            <summary>Clientes</summary>
+            <div class="submenu-clientes">
+              <a href="clientes.html">Registro de clientes</a>
+              <a href="Clientes_Registrados/registrados.html"
+                >Clientes registrados</a
+              >
+            </div>
+          </details>
+          <button id="btnTrabajos">Control de Trabajos</button>
+        </nav>
+      </aside>
 
-      <section class="menu">
-        <button id="btnCalendario">Calendario de Citas</button>
-        <button id="btnClientes">Clientes</button>
-        <button id="btnTrabajos">Control de Trabajos</button>
-      </section>
-    </main>
+      <div class="contenido-principal">
+        <main class="contenedor">
+          <h2>Sistema de Gestión</h2>
+          <p>Bienvenido al sistema de administración técnica.</p>
+        </main>
 
-    <section
-      id="pantallaCalendario"
-      class="contenedor calendario-contenedor"
-      hidden
-    >
-      <div class="calendario-titulo">
-        <h2>Calendario de Citas</h2>
-        <p>Selecciona el día para organizar la atención.</p>
-      </div>
-
-      <div class="calendario-layout">
-        <div class="panel-calendario">
-          <div class="calendario-cabecera">
-            <button id="mesAnterior" type="button" aria-label="Mes anterior">
-              ‹
-            </button>
-            <h3 id="mesActual">Mes y año</h3>
-            <button id="mesSiguiente" type="button" aria-label="Mes siguiente">
-              ›
-            </button>
+        <section
+          id="pantallaCalendario"
+          class="contenedor calendario-contenedor"
+          hidden
+        >
+          <div class="calendario-titulo">
+            <h2>Calendario de Citas</h2>
+            <p>Selecciona el día para organizar la atención.</p>
           </div>
 
-          <div class="dias-semana">
-            <span>DOM</span>
-            <span>LUN</span>
-            <span>MAR</span>
-            <span>MIÉ</span>
-            <span>JUE</span>
-            <span>VIE</span>
-            <span>SÁB</span>
-          </div>
+          <div class="calendario-layout">
+            <div class="panel-calendario">
+              <div class="calendario-cabecera">
+                <button
+                  id="mesAnterior"
+                  type="button"
+                  aria-label="Mes anterior"
+                >
+                  ‹
+                </button>
+                <h3 id="mesActual">Mes y año</h3>
+                <button
+                  id="mesSiguiente"
+                  type="button"
+                  aria-label="Mes siguiente"
+                >
+                  ›
+                </button>
+              </div>
 
-          <div id="diasCalendario" class="dias-calendario"></div>
-        </div>
+              <div class="dias-semana">
+                <span>DOM</span>
+                <span>LUN</span>
+                <span>MAR</span>
+                <span>MIÉ</span>
+                <span>JUE</span>
+                <span>VIE</span>
+                <span>SÁB</span>
+              </div>
 
-        <div class="panel-horarios">
-          <div class="horarios-cabecera">
-            <h3>◷ Reserva de Hora</h3>
-            <p>Elige la hora de atención</p>
-          </div>
-
-          <div class="horarios-contenido">
-            <p id="fechaSeleccionada">Selecciona un día del calendario.</p>
-
-            <div id="horariosDisponibles" class="horarios-disponibles">
-              <button type="button" class="hora-boton" data-hora="09:00">
-                09:00
-              </button>
-              <button type="button" class="hora-boton" data-hora="10:00">
-                10:00
-              </button>
-              <button type="button" class="hora-boton" data-hora="11:00">
-                11:00
-              </button>
-              <button type="button" class="hora-boton" data-hora="12:00">
-                12:00
-              </button>
-              <button type="button" class="hora-boton" data-hora="13:00">
-                13:00
-              </button>
-              <button type="button" class="hora-boton" data-hora="14:00">
-                14:00
-              </button>
-              <button type="button" class="hora-boton" data-hora="15:00">
-                15:00
-              </button>
-              <button type="button" class="hora-boton" data-hora="16:00">
-                16:00
-              </button>
-              <button type="button" class="hora-boton" data-hora="17:00">
-                17:00
-              </button>
-              <button type="button" class="hora-boton" data-hora="18:00">
-                18:00
-              </button>
+              <div id="diasCalendario" class="dias-calendario"></div>
             </div>
 
-            <p id="disponibilidad" class="nota-horario">
-              Selecciona una fecha para consultar los horarios.
-            </p>
+            <div class="panel-horarios">
+              <div class="horarios-cabecera">
+                <h3>◷ Reserva de Hora</h3>
+                <p>Elige la hora de atención</p>
+              </div>
+
+              <div class="horarios-contenido">
+                <p id="fechaSeleccionada">Selecciona un día del calendario.</p>
+
+                <div id="horariosDisponibles" class="horarios-disponibles">
+                  <button type="button" class="hora-boton" data-hora="09:00">
+                    09:00
+                  </button>
+                  <button type="button" class="hora-boton" data-hora="10:00">
+                    10:00
+                  </button>
+                  <button type="button" class="hora-boton" data-hora="11:00">
+                    11:00
+                  </button>
+                  <button type="button" class="hora-boton" data-hora="12:00">
+                    12:00
+                  </button>
+                  <button type="button" class="hora-boton" data-hora="13:00">
+                    13:00
+                  </button>
+                  <button type="button" class="hora-boton" data-hora="14:00">
+                    14:00
+                  </button>
+                  <button type="button" class="hora-boton" data-hora="15:00">
+                    15:00
+                  </button>
+                  <button type="button" class="hora-boton" data-hora="16:00">
+                    16:00
+                  </button>
+                  <button type="button" class="hora-boton" data-hora="17:00">
+                    17:00
+                  </button>
+                  <button type="button" class="hora-boton" data-hora="18:00">
+                    18:00
+                  </button>
+                </div>
+
+                <p id="disponibilidad" class="nota-horario">
+                  Selecciona una fecha para consultar los horarios.
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div id="resumenCita" class="resumen-cita">
-        Selecciona un día para comenzar.
-      </div>
+          <div id="resumenCita" class="resumen-cita">
+            Selecciona un día para comenzar.
+          </div>
 
-      <div class="acciones-calendario">
-        <button id="btnVolver" type="button">Volver al inicio</button>
+          <div class="acciones-calendario">
+            <button id="btnVolver" type="button">Volver al inicio</button>
+          </div>
+        </section>
       </div>
-    </section>
+    </div>
 
     <script src="script.js"></script>
   </body>
