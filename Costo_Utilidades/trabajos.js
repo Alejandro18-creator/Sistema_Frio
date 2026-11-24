@@ -2,11 +2,8 @@
 // PUCOR - CONTROL DE COSTOS Y UTILIDADES
 // ==========================================
 
-const menuTrabajos = document.getElementById("menuTrabajos");
 const btnCotizaciones = document.getElementById("btnCotizaciones");
-const btnTrabajosRealizados = document.getElementById("btnTrabajosRealizados");
 const btnNuevaCotizacion = document.getElementById("btnNuevaCotizacion");
-const btnVolver = document.getElementById("btnVolver");
 
 const pantallaNuevaCotizacion = document.getElementById(
   "pantallaNuevaCotizacion",
@@ -16,16 +13,11 @@ const pantallaHistorialCotizaciones = document.getElementById(
 );
 const pantallaTrabajos = document.getElementById("pantallaTrabajos");
 const pantallaEditarTrabajo = document.getElementById("pantallaEditarTrabajo");
-
-const btnVolverNuevaCotizacion = document.getElementById(
-  "btnVolverNuevaCotizacion",
-);
-const btnVolverHistorialCotizaciones = document.getElementById(
-  "btnVolverHistorialCotizaciones",
-);
-const btnVolverTrabajos = document.getElementById("btnVolverTrabajos");
-
 const formCotizacion = document.getElementById("formCotizacion");
+
+// Identifica si estamos creando o editando una cotización
+let cotizacionEnEdicion = null;
+
 const clienteCotizacion = document.getElementById("clienteCotizacion");
 const descripcionCotizacion = document.getElementById("descripcionCotizacion");
 const listaRepuestos = document.getElementById("listaRepuestos");
@@ -77,11 +69,6 @@ function ocultarTodasLasPantallas() {
   pantallaEditarTrabajo.hidden = true;
 }
 
-/*function volverAlMenuPrincipal() {
-  ocultarTodasLasPantallas();
-  menuTrabajos.hidden = false;
-}*/
-
 btnCotizaciones.addEventListener("click", () => {
   ocultarTodasLasPantallas();
   pantallaHistorialCotizaciones.hidden = false;
@@ -92,17 +79,6 @@ btnNuevaCotizacion.addEventListener("click", () => {
   ocultarTodasLasPantallas();
   pantallaNuevaCotizacion.hidden = false;
   cargarClientes();
-});
-
-btnTrabajosRealizados.addEventListener("click", () => {
-  ocultarTodasLasPantallas();
-  pantallaTrabajos.hidden = false;
-});
-
-btnVolverHistorialCotizaciones.addEventListener("click", volverAlMenuPrincipal);
-
-btnVolver.addEventListener("click", () => {
-  window.location.href = "../index.html";
 });
 
 // CLIENTES
@@ -248,15 +224,10 @@ formCotizacion.addEventListener("submit", (evento) => {
     precio: Number(fila.querySelector(".precio-item").value),
   }));
 
-  const nuevaCotizacion = {
-    id: Date.now(),
-    numero: String(
-      (JSON.parse(localStorage.getItem("cotizacionesPUCOR")) || []).reduce(
-        (mayor, c) => Math.max(mayor, Number(c.numero) || 0),
-        0,
-      ) + 1,
-    ).padStart(5, "0"),
-    fecha: new Date().toLocaleDateString("es-CL"),
+  const cotizaciones =
+    JSON.parse(localStorage.getItem("cotizacionesPUCOR")) || [];
+
+  const datosActualizados = {
     cliente: cliente.nombre,
     descripcion: descripcionCotizacion.value.trim(),
     repuestos,
@@ -268,22 +239,52 @@ formCotizacion.addEventListener("submit", (evento) => {
       calcularSubtotal(listaMateriales) +
       (Number(costoTraslado.value) || 0) +
       (Number(costoManoObra.value) || 0),
-    estado: "Pendiente",
   };
 
-  const cotizaciones =
-    JSON.parse(localStorage.getItem("cotizacionesPUCOR")) || [];
-  cotizaciones.push(nuevaCotizacion);
-  localStorage.setItem("cotizacionesPUCOR", JSON.stringify(cotizaciones));
+  if (cotizacionEnEdicion !== null) {
+    const indice = cotizaciones.findIndex(
+      (c) => String(c.id) === String(cotizacionEnEdicion),
+    );
 
-  alert("¡Cotización guardada correctamente!");
+    if (indice === -1) {
+      alert("No se encontró la cotización que deseas editar.");
+      return;
+    }
+
+    Object.assign(cotizaciones[indice], datosActualizados);
+
+    localStorage.setItem("cotizacionesPUCOR", JSON.stringify(cotizaciones));
+
+    alert("¡Cotización actualizada correctamente!");
+
+    cotizacionEnEdicion = null;
+  } else {
+    const nuevaCotizacion = {
+      id: Date.now(),
+      numero: String(
+        cotizaciones.reduce(
+          (mayor, c) => Math.max(mayor, Number(c.numero) || 0),
+          0,
+        ) + 1,
+      ).padStart(5, "0"),
+      fecha: new Date().toLocaleDateString("es-CL"),
+      ...datosActualizados,
+      estado: "Pendiente",
+    };
+
+    cotizaciones.push(nuevaCotizacion);
+
+    localStorage.setItem("cotizacionesPUCOR", JSON.stringify(cotizaciones));
+
+    alert("¡Cotización guardada correctamente!");
+  }
 
   formCotizacion.reset();
   listaRepuestos.innerHTML = "";
   listaMateriales.innerHTML = "";
   actualizarTotales();
 
-  volverAlMenuPrincipal();
+  ocultarTodasLasPantallas();
 });
 
 // HISTORIAL DE COTIZACIONES
@@ -301,6 +302,7 @@ function mostrarCotizaciones() {
   cotizaciones.forEach((cotizacion) => {
     const tarjeta = document.createElement("div");
     tarjeta.className = "tarjeta-cotizacion";
+    tarjeta.id = `cotizacion-${cotizacion.id}`;
 
     const numero = document.createElement("h3");
     numero.textContent = `Cotización N.º ${cotizacion.numero || "Sin número"}`;
@@ -378,8 +380,68 @@ function abrirEdicionTrabajo(id) {
 
   if (!cotizacion) return;
 
-  ocultarTodasLasPantallas();
-  pantallaEditarTrabajo.hidden = false;
+  cotizacionEnEdicion = cotizacion.id;
 
-  datosCotizacionOriginal.textContent = `Cotización N.º ${cotizacion.id} | Cliente: ${cotizacion.cliente} | Total original: ${formatoPesos(cotizacion.total)}`;
+  ocultarTodasLasPantallas();
+  pantallaNuevaCotizacion.hidden = false;
+
+  cargarClientes();
+
+  const clientes = JSON.parse(localStorage.getItem("clientesPUCOR")) || [];
+  const indiceCliente = clientes.findIndex(
+    (cliente) => cliente.nombre === cotizacion.cliente,
+  );
+
+  clienteCotizacion.value = indiceCliente;
+
+  descripcionCotizacion.value = cotizacion.descripcion;
+
+  listaRepuestos.innerHTML = "";
+  listaMateriales.innerHTML = "";
+
+  cotizacion.repuestos.forEach((item) => {
+    const fila = crearFilaItem("repuesto");
+
+    fila.querySelector(".nombre-item").value = item.nombre;
+    fila.querySelector(".cantidad-item").value = item.cantidad;
+    fila.querySelector(".precio-item").value = item.precio;
+
+    listaRepuestos.appendChild(fila);
+  });
+
+  cotizacion.materiales.forEach((item) => {
+    const fila = crearFilaItem("material");
+
+    fila.querySelector(".nombre-item").value = item.nombre;
+    fila.querySelector(".cantidad-item").value = item.cantidad;
+    fila.querySelector(".precio-item").value = item.precio;
+
+    listaMateriales.appendChild(fila);
+  });
+
+  costoTraslado.value = cotizacion.traslado || 0;
+  costoManoObra.value = cotizacion.manoObra || 0;
+
+  actualizarTotales();
+}
+
+if (window.location.hash.startsWith("#cotizacion-")) {
+  const idCotizacion = window.location.hash.replace("#cotizacion-", "");
+
+  btnCotizaciones.click();
+
+  setTimeout(() => {
+    const cotizacion = document.getElementById(`cotizacion-${idCotizacion}`);
+
+    if (cotizacion) {
+      cotizacion.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+
+      cotizacion.style.outline = "3px solid var(--azul-pucor)";
+    }
+  }, 100);
+} else if (window.location.hash === "#cotizaciones") {
+  btnCotizaciones.click();
 }

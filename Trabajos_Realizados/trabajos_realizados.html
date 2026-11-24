@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PUCOR | Trabajos realizados</title>
+
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="trabajos_realizados.css" />
+  </head>
+
+  <body>
+    <div class="estructura-principal">
+      <aside class="barra-lateral">
+        <header class="encabezado">
+          <h1>PUCOR</h1>
+          <p>Reparación y Mantención de Máquinas de Frío</p>
+        </header>
+
+        <nav class="menu">
+          <a href="../index.html">Calendario de Citas</a>
+
+          <details class="grupo-menu">
+            <summary>Clientes</summary>
+            <div class="submenu-clientes">
+              <a href="../clientes.html">Registro de clientes</a>
+              <a href="../Clientes_Registrados/registrados.html">
+                Clientes registrados
+              </a>
+            </div>
+          </details>
+
+          <details class="grupo-menu">
+            <summary>Control de Trabajos</summary>
+            <div class="submenu-clientes">
+              <a href="../Costo_Utilidades/trabajos.html#cotizaciones">Cotizaciones</a>
+            </div>
+          </details>
+
+          <details class="grupo-menu" open>
+            <summary class="opcion-activa">Trabajos realizados</summary>
+            <div class="submenu-clientes">
+              <a href="trabajos_realizados.html" class="subopcion-activa">
+                Control de Costos y Utilidades
+              </a>
+            </div>
+          </details>
+        </nav>
+      </aside>
+
+      <div class="contenido-principal">
+        <main class="contenedor">
+          <h2>Control de Costos y Utilidades</h2>
+          <p>Administración de trabajos realizados por PUCOR.</p>
+
+          <section id="contenidoTrabajosRealizados">
+            <div class="resumen-trabajos">
+              <div class="indicador-trabajo">
+                <h3>Trabajos terminados</h3>
+                <p id="totalTrabajos">0</p>
+              </div>
+
+              <div class="indicador-trabajo">
+                <h3>Ingresos registrados</h3>
+                <p id="totalIngresos">$0</p>
+              </div>
+
+              <div class="indicador-trabajo">
+                <h3>Utilidad acumulada</h3>
+                <p id="totalUtilidad">$0</p>
+              </div>
+            </div>
+
+            <h2>Listado de trabajos realizados</h2>
+
+            <div id="listaTrabajosRealizados">
+              <p>Aquí aparecerán los trabajos terminados.</p>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="trabajos_realizados.js"></script>
+  </body>
+</html>
