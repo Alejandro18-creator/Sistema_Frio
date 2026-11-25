@@ -292,6 +292,7 @@ formCotizacion.addEventListener("submit", (evento) => {
 function mostrarCotizaciones() {
   const cotizaciones =
     JSON.parse(localStorage.getItem("cotizacionesPUCOR")) || [];
+
   listaCotizaciones.innerHTML = "";
 
   if (cotizaciones.length === 0) {
@@ -305,7 +306,7 @@ function mostrarCotizaciones() {
     tarjeta.id = `cotizacion-${cotizacion.id}`;
 
     const numero = document.createElement("h3");
-    numero.textContent = `Cotización N.º ${cotizacion.numero || "Sin número"}`;
+    numero.textContent = `Cotización N.º ${cotizacion.numero}`;
 
     const fecha = document.createElement("p");
     fecha.textContent = `Fecha: ${cotizacion.fecha}`;
@@ -323,6 +324,100 @@ function mostrarCotizaciones() {
     estado.textContent = `Estado: ${cotizacion.estado}`;
 
     tarjeta.append(numero, fecha, cliente, descripcion, total, estado);
+
+    // DETALLE COMPLETO DE LA COTIZACIÓN
+
+    const detalle = document.createElement("div");
+    detalle.className = "detalle-cotizacion";
+
+    const tituloDetalle = document.createElement("h3");
+    tituloDetalle.textContent = "Detalle de la cotización";
+    detalle.appendChild(tituloDetalle);
+
+    // Repuestos
+
+    const tituloRepuestos = document.createElement("h4");
+    tituloRepuestos.textContent = "Repuestos";
+    detalle.appendChild(tituloRepuestos);
+
+    if (cotizacion.repuestos && cotizacion.repuestos.length > 0) {
+      cotizacion.repuestos.forEach((item) => {
+        const subtotal = Number(item.cantidad) * Number(item.precio);
+
+        const texto = document.createElement("p");
+        texto.textContent =
+          `${item.nombre} | Cantidad: ${item.cantidad} | ` +
+          `Precio unitario: ${formatoPesos(item.precio)} | ` +
+          `Subtotal: ${formatoPesos(subtotal)}`;
+
+        detalle.appendChild(texto);
+      });
+    } else {
+      const texto = document.createElement("p");
+      texto.textContent = "Sin repuestos registrados.";
+      detalle.appendChild(texto);
+    }
+
+    // Materiales
+
+    const tituloMateriales = document.createElement("h4");
+    tituloMateriales.textContent = "Materiales";
+    detalle.appendChild(tituloMateriales);
+
+    if (cotizacion.materiales && cotizacion.materiales.length > 0) {
+      cotizacion.materiales.forEach((item) => {
+        const subtotal = Number(item.cantidad) * Number(item.precio);
+
+        const texto = document.createElement("p");
+        texto.textContent =
+          `${item.nombre} | Cantidad: ${item.cantidad} | ` +
+          `Precio unitario: ${formatoPesos(item.precio)} | ` +
+          `Subtotal: ${formatoPesos(subtotal)}`;
+
+        detalle.appendChild(texto);
+      });
+    } else {
+      const texto = document.createElement("p");
+      texto.textContent = "Sin materiales registrados.";
+      detalle.appendChild(texto);
+    }
+
+    // Otros costos
+
+    const tituloOtros = document.createElement("h4");
+    tituloOtros.textContent = "Otros costos";
+    detalle.appendChild(tituloOtros);
+
+    const textoTraslado = document.createElement("p");
+    textoTraslado.textContent = `Traslado: ${formatoPesos(cotizacion.traslado)}`;
+    detalle.appendChild(textoTraslado);
+
+    const textoManoObra = document.createElement("p");
+    textoManoObra.textContent = `Mano de obra: ${formatoPesos(cotizacion.manoObra)}`;
+    detalle.appendChild(textoManoObra);
+
+    // Abrir automáticamente cuando se llega desde Control de Costos
+
+    detalle.hidden = window.location.hash !== `#cotizacion-${cotizacion.id}`;
+
+    const botonDetalle = document.createElement("button");
+    botonDetalle.type = "button";
+
+    botonDetalle.textContent = detalle.hidden
+      ? "Ver detalle"
+      : "Ocultar detalle";
+
+    botonDetalle.addEventListener("click", () => {
+      detalle.hidden = !detalle.hidden;
+
+      botonDetalle.textContent = detalle.hidden
+        ? "Ver detalle"
+        : "Ocultar detalle";
+    });
+
+    tarjeta.append(botonDetalle, detalle);
+
+    // BOTONES DE ESTADO
 
     if (cotizacion.estado === "Pendiente") {
       const botonAceptar = document.createElement("button");
