@@ -17,6 +17,7 @@ const formCotizacion = document.getElementById("formCotizacion");
 
 // Identifica si estamos creando o editando una cotización
 let cotizacionEnEdicion = null;
+let modoSoloLectura = false;
 
 const clienteCotizacion = document.getElementById("clienteCotizacion");
 const descripcionCotizacion = document.getElementById("descripcionCotizacion");
@@ -466,6 +467,105 @@ function cambiarEstadoCotizacion(id, nuevoEstado) {
 
   mostrarCotizaciones();
 }
+//* Visualizar cotización original en modo solo lectura*
+function abrirVisualizacionCotizacion(id) {
+  const cotizaciones =
+    JSON.parse(localStorage.getItem("cotizacionesPUCOR")) || [];
+
+  const cotizacion = cotizaciones.find((c) => String(c.id) === String(id));
+
+  if (!cotizacion) {
+    alert("No se encontró la cotización.");
+    return;
+  }
+
+  modoSoloLectura = true;
+  cotizacionEnEdicion = null;
+
+  ocultarTodasLasPantallas();
+  pantallaNuevaCotizacion.hidden = false;
+
+  cargarClientes();
+
+  const clientes = JSON.parse(localStorage.getItem("clientesPUCOR")) || [];
+
+  const indiceCliente = clientes.findIndex(
+    (cliente) => cliente.nombre === cotizacion.cliente,
+  );
+
+  clienteCotizacion.value = indiceCliente;
+  descripcionCotizacion.value = cotizacion.descripcion;
+
+  listaRepuestos.innerHTML = "";
+  listaMateriales.innerHTML = "";
+
+  (cotizacion.repuestos || []).forEach((item) => {
+    const fila = crearFilaItem("repuesto");
+
+    fila.querySelector(".nombre-item").value = item.nombre;
+    fila.querySelector(".cantidad-item").value = item.cantidad;
+    fila.querySelector(".precio-item").value = item.precio;
+
+    listaRepuestos.appendChild(fila);
+  });
+
+  (cotizacion.materiales || []).forEach((item) => {
+    const fila = crearFilaItem("material");
+
+    fila.querySelector(".nombre-item").value = item.nombre;
+    fila.querySelector(".cantidad-item").value = item.cantidad;
+    fila.querySelector(".precio-item").value = item.precio;
+
+    listaMateriales.appendChild(fila);
+  });
+
+  costoTraslado.value = cotizacion.traslado || 0;
+  costoManoObra.value = cotizacion.manoObra || 0;
+
+  actualizarTotales();
+
+  // Bloquear los campos para impedir modificaciones
+  formCotizacion
+    .querySelectorAll("input, select, textarea")
+    .forEach((campo) => {
+      campo.disabled = true;
+    });
+
+  // Ocultar botones para agregar y quitar elementos
+  btnAgregarRepuesto.hidden = true;
+  btnAgregarMaterial.hidden = true;
+
+  formCotizacion.querySelectorAll(".btn-quitar-item").forEach((boton) => {
+    boton.hidden = true;
+  });
+
+  // Ocultar botón de guardar
+  const botonGuardar = formCotizacion.querySelector('button[type="submit"]');
+
+  if (botonGuardar) {
+    botonGuardar.hidden = true;
+  }
+
+  // Cambiar título
+  pantallaNuevaCotizacion.querySelector("h2").textContent =
+    `Visualizar cotización N.º ${cotizacion.numero}`;
+
+  // Crear botón para regresar
+  let botonVolver = document.getElementById("btnVolverVisualizacion");
+
+  if (!botonVolver) {
+    botonVolver = document.createElement("button");
+    botonVolver.id = "btnVolverVisualizacion";
+    botonVolver.type = "button";
+    botonVolver.textContent = "Volver a Control de Costos y Utilidades";
+
+    formCotizacion.appendChild(botonVolver);
+  }
+
+  botonVolver.onclick = () => {
+    window.location.href = "../Trabajos_Realizados/trabajos_realizados.html";
+  };
+}
 
 function abrirEdicionTrabajo(id) {
   const cotizaciones =
@@ -520,7 +620,14 @@ function abrirEdicionTrabajo(id) {
   actualizarTotales();
 }
 
-if (window.location.hash.startsWith("#cotizacion-")) {
+// Abrir cotización original en modo solo lectura
+if (window.location.hash.startsWith("#ver-cotizacion-")) {
+  const idCotizacion = window.location.hash.replace("#ver-cotizacion-", "");
+
+  abrirVisualizacionCotizacion(idCotizacion);
+
+  // Abrir cotización desde el historial
+} else if (window.location.hash.startsWith("#cotizacion-")) {
   const idCotizacion = window.location.hash.replace("#cotizacion-", "");
 
   btnCotizaciones.click();
@@ -537,6 +644,8 @@ if (window.location.hash.startsWith("#cotizacion-")) {
       cotizacion.style.outline = "3px solid var(--azul-pucor)";
     }
   }, 100);
+} else if (window.location.hash === "#cotizaciones") {
+  btnCotizaciones.click();
 } else if (window.location.hash === "#cotizaciones") {
   btnCotizaciones.click();
 }

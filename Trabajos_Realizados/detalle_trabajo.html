@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>PUCOR | Detalle del trabajo</title>
+
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="trabajos_realizados.css" />
+  </head>
+
+  <body>
+    <div class="estructura-principal">
+      <aside class="barra-lateral">
+        <header class="encabezado">
+          <h1>PUCOR</h1>
+          <p>Reparación y Mantención de Máquinas de Frío</p>
+        </header>
+
+        <nav class="menu">
+          <a href="../index.html"> Calendario de Citas </a>
+
+          <a href="../clientes.html"> Registro de clientes </a>
+
+          <a href="../Costo_Utilidades/trabajos.html"> Control de Trabajos </a>
+
+          <a href="trabajos_realizados.html">
+            Control de Costos y Utilidades
+          </a>
+        </nav>
+      </aside>
+
+      <div class="contenido-principal">
+        <main class="contenedor">
+          <h2>Detalle del trabajo realizado</h2>
+
+          <p>Información y control financiero del trabajo terminado.</p>
+
+          <div id="detalleTrabajoPagina">
+            <!-- Aquí aparecerá el detalle del trabajo -->
+          </div>
+
+          <button
+            type="button"
+            onclick="window.location.href = 'trabajos_realizados.html'"
+          >
+            Volver al listado
+          </button>
+        </main>
+      </div>
+    </div>
+
+    <script src="detalle_trabajo.js"></script>
+  </body>
+</html>
